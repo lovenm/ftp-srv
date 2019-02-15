@@ -33,8 +33,9 @@ module.exports = {
       })
       .then(([code, messages]) => this.reply(code, 'Status begin', ...messages, 'Status end'))
       .catch((err) => {
+        const code = err.code || 450;
         log.error(err);
-        return this.reply(450, err.message);
+        return this.reply(code, err.message);
       });
     } else {
       return this.reply(211, 'Status OK');

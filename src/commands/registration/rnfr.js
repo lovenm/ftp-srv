@@ -13,8 +13,9 @@ module.exports = {
       return this.reply(350);
     })
     .catch((err) => {
+      const code = err.code || 550;
       log.error(err);
-      return this.reply(550, err.message);
+      return this.reply(code, err.message);
     });
   },
   syntax: '{{cmd}} <name>',

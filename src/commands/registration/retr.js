@@ -50,9 +50,10 @@ module.exports = {
       return this.reply(425, 'No connection established');
     })
     .catch((err) => {
+      const code = err.code || 551;
       log.error(err);
       this.emit('RETR', err);
-      return this.reply(551, err.message);
+      return this.reply(code, err.message);
     })
     .finally(() => {
       this.connector.end();

@@ -44,8 +44,9 @@ module.exports = {
       return this.reply(425, 'No connection established');
     })
     .catch((err) => {
+      const code = err.code || 451;
       log.error(err);
-      return this.reply(451, err.message || 'No directory');
+      return this.reply(code, err.message || 'No directory');
     })
     .finally(() => {
       this.connector.end();
